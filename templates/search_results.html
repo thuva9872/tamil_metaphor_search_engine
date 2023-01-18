@@ -1,0 +1,54 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<div class="s006">
+
+
+		{% if hits %}
+		<hgroup class="mb20">
+			<h1>Search Results</h1>
+			<h2 class="lead" id="results"><strong class="text-danger">{{ num_results }}</strong> results were found for the search for <strong class="text-danger">{{  query  }}</strong></h2>
+			<h2 class="lead" id="results"> About <strong class="text-danger">({{  time  }}ms)</strong></h2>
+		</hgroup>
+
+		<section id='song_section' class="col-md-8">
+			{% for hit in hits %}
+			<article class="search-result row">
+				<div class="col-md-12">
+					<h3><b>{{ hit._source.பாடல் }}</b></h3>
+					<ul class="meta-search">
+						<li><i class="glyphicon glyphicon-tags"></i> <span>வருடம்: {{ hit._source.வருடம்  }} </span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>படம்: {{ hit._source.படம்  }} </span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>இசைமைப்பாளர்: {{ hit._source.இசைமைப்பாளர்  }} </span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>பாடலாசிரியர்: {{ hit._source.பாடலாசிரியர்  }} </span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>பாடகர்கள்: {{ hit._source.பாடகர்}}</span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>பாடல்வரிகள்: {{ hit._source.பாடல்வரிகள்  }} </span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>உருவகம் 1: {{ hit._source['உருவகம் 1']  }} </span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>விளக்கம் 1: {{ hit._source['விளக்கம் 1']  }} </span></li>
+						{% if(hit._source['உருவகம் 2']!="") %}
+						<li><i class="glyphicon glyphicon-tags"></i> <span>உருவகம் 2: {{ hit._source['உருவகம் 2']  }} </span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>விளக்கம் 2: {{ hit._source['விளக்கம் 2']  }} </span></li>
+						{% endif %}
+						{% if(hit._source['உருவகம் 3']!="") %}
+						<li><i class="glyphicon glyphicon-tags"></i> <span>உருவகம் 3: {{ hit._source['உருவகம் 3']  }} </span></li>
+						<li><i class="glyphicon glyphicon-tags"></i> <span>விளக்கம் 3: {{ hit._source['விளக்கம் 3']  }} </span></li>
+						{% endif %}
+					</ul>
+					<p style="white-space: pre-line">{{ hit._source.விமர்சனம் }}</p>
+				</div>
+				<div class="col-md-6">
+
+				</div>
+				<span class="clearfix borda"></span>
+			</article>
+			{% endfor %}
+		</section>
+		{% else %}
+			<section id='song_section' class="col-md-8">
+				<hgroup class="mb20">
+					<h1>No Results</h1>
+				</hgroup>
+			</section>
+		{% endif %}
+	</div>
